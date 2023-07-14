@@ -1,5 +1,6 @@
 <?php
 
+use meryemertrk\todo\rbac\OwnRule;
 use yii\db\Migration;
 
 class m220220_100716_todo_rbac extends Migration
@@ -20,7 +21,7 @@ class m220220_100716_todo_rbac extends Migration
         $auth->addChild($admin, $todoWebTaskIndex);
 
         $todoWebTaskCreate = $auth->createPermission('todoWebTaskCreate');
-        $todoWebTaskCreate->description = 'Content Web TaskCreate';
+        $todoWebTaskCreate->description = 'Todo Web TaskCreate';
         $auth->add($todoWebTaskCreate);
         $auth->addChild($admin, $todoWebTaskCreate);
 
@@ -45,7 +46,7 @@ class m220220_100716_todo_rbac extends Migration
         $auth->addChild($admin, $todoWebTaskIndexOwn);
 
         $todoWebTaskCreateOwn = $auth->createPermission('todotWebTaskCreateOwn');
-        $todoWebTaskCreateOwn->description = 'Content Web TaskCreateOwn';
+        $todoWebTaskCreateOwn->description = 'Todo Web TaskCreateOwn';
         $todoWebTaskCreateOwn->ruleName = $rule->name;
         $auth->add($todoWebTaskCreateOwn);
         $auth->addChild($admin, $todoWebTaskCreateOwn);
@@ -85,16 +86,16 @@ public function down()
     $auth = \Yii::$app->authManager;
 
 
-    $auth->remove($auth->getPermission('todoWebCategoryIndex'));
-    $auth->remove($auth->getPermission('todoWebCategoryCreate'));
-    $auth->remove($auth->getPermission('todoWebCategoryView'));
-    $auth->remove($auth->getPermission('todoWebCategoryUpdate'));
-    $auth->remove($auth->getPermission('todoWebCategoryDelete'));
-    $auth->remove($auth->getPermission('todoWebCategoryIndexOwn'));
-    $auth->remove($auth->getPermission('todoWebCategoryCreateOwn'));
-    $auth->remove($auth->getPermission('todoWebCategoryViewOwn'));
-    $auth->remove($auth->getPermission('todoWebCategoryUpdateOwn'));
-    $auth->remove($auth->getPermission('todoWebCategoryDeleteOwn'));
+    $auth->remove($auth->getPermission('todoWebTaskIndex'));
+    $auth->remove($auth->getPermission('todoWebTaskCreate'));
+    $auth->remove($auth->getPermission('todoWebTaskView'));
+    $auth->remove($auth->getPermission('todoWebTaskUpdate'));
+    $auth->remove($auth->getPermission('todoWebTaskDelete'));
+    $auth->remove($auth->getPermission('todoWebTaskIndexOwn'));
+    $auth->remove($auth->getPermission('todoWebTaskCreateOwn'));
+    $auth->remove($auth->getPermission('todoWebTaskViewOwn'));
+    $auth->remove($auth->getPermission('todoWebTaskUpdateOwn'));
+    $auth->remove($auth->getPermission('todoWebTaskDeleteOwn'));
 
 
 

@@ -2,6 +2,7 @@
 
 namespace meryemertrk\todo\models;
 
+use meryemertrk\todo\Module;
 use Yii;
 
 /**
@@ -18,14 +19,14 @@ use Yii;
  *
  * @property UserUser $user
  */
-class Todo extends \yii\db\ActiveRecord
+class Task extends \yii\db\ActiveRecord
 {
     /**
      * {@inheritdoc}
      */
     public static function tableName()
     {
-        return 'todo_task';
+        return '{{' . Module::$tablePrefix . 'todo}}';
     }
 
     /**
