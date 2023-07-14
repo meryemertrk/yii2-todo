@@ -1,6 +1,7 @@
 <?php
 
-use meryemertrk\Module;
+
+use meryemertrk\todo\Module;
 use yii\db\Schema;
 use yii\db\Migration;
 use portalium\user\Module as UserModule;
