@@ -2,11 +2,12 @@
 
 namespace meryemertrk\todo\models;
 
-use meryemertrk\todo\Module;
+use portalium\user\models\User;
 use Yii;
 
+
 /**
- * This is the model class for table "todo_task".
+ * This is the model class for table "{{%todo_task}}".
  *
  * @property int $id_task
  * @property string $title
@@ -17,7 +18,7 @@ use Yii;
  * @property string $date_create
  * @property string $date_update
  *
- * @property UserUser $user
+ * @property User $user
  */
 class Task extends \yii\db\ActiveRecord
 {
@@ -26,7 +27,7 @@ class Task extends \yii\db\ActiveRecord
      */
     public static function tableName()
     {
-        return '{{' . Module::$tablePrefix . 'todo}}';
+        return '{{%todo_task}}';
     }
 
     /**
@@ -40,9 +41,11 @@ class Task extends \yii\db\ActiveRecord
             [['status', 'id_user', 'id_workspace'], 'integer'],
             [['date_create', 'date_update'], 'safe'],
             [['description'], 'string', 'max' => 255],
-            [['id_user'], 'exist', 'skipOnError' => true, 'targetClass' => UserUser::class, 'targetAttribute' => ['id_user' => 'id_user']],
+            [['id_user'], 'exist', 'skipOnError' => true, 'targetClass' => User::class, 'targetAttribute' => ['id_user' => 'id_user']],
         ];
     }
+
+    //Save butonuna basıldığında alınan hatanın çözümü:User modülü değiştirildi.
 
     /**
      * {@inheritdoc}
@@ -68,6 +71,6 @@ class Task extends \yii\db\ActiveRecord
      */
     public function getUser()
     {
-        return $this->hasOne(UserUser::class, ['id_user' => 'id_user']);
+        return $this->hasOne(User::class, ['id_user' => 'id_user']);
     }
 }
