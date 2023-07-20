@@ -1,6 +1,5 @@
 <?php
 
-
 use meryemertrk\todo\Module;
 use yii\db\Schema;
 use yii\db\Migration;
