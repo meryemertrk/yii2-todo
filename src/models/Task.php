@@ -2,6 +2,8 @@
 
 namespace meryemertrk\todo\models;
 
+
+use meryemertrk\todo\Module;
 use portalium\user\models\User;
 use Yii;
 
@@ -22,12 +24,19 @@ use Yii;
  */
 class Task extends \yii\db\ActiveRecord
 {
+
+    const STATUS = [
+        'completed' => 0,
+        'updated' => 1,
+        'deleted' => 2,
+    ];
+
     /**
      * {@inheritdoc}
      */
     public static function tableName()
     {
-        return '{{%todo_task}}';
+        return '{{%' . Module::$tablePrefix . 'task}}';
     }
 
     /**
@@ -72,5 +81,17 @@ class Task extends \yii\db\ActiveRecord
     public function getUser()
     {
         return $this->hasOne(User::class, ['id_user' => 'id_user']);
+    }
+
+    public static function getStatusList(){
+
+        return [
+            'STATUS' => [
+                self::STATUS['completed'] => Module::t('Completed'),
+                self::STATUS['updated'] => Module::t('Updated'),
+                self::STATUS['deleted'] => Module::t('Deleted'),
+            ],
+
+        ];
     }
 }
