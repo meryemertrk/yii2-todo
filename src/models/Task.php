@@ -94,4 +94,32 @@ class Task extends \yii\db\ActiveRecord
 
         ];
     }
+
+    public static function find()
+    {
+        $activeWorkspaceId = Yii::$app->workspace->id;
+        $query = parent::find();
+        if (Yii::$app->user->can('todoTaskFindAll', ['id_module' => 'todo'])) {
+            return $query;
+        }
+        if (!Yii::$app->user->can('todoTaskFindOwner', ['id_module' => 'todo'])) {
+            return $query->andWhere('0=1');
+        }
+        if ($activeWorkspaceId) {
+            $query->andWhere([Module::$tablePrefix . 'todo.id_workspace' => $activeWorkspaceId]);
+        }else{
+            return $query->andWhere('0=1');
+        }
+        return $query;
+    }
+
+    public function beforeSave($insert)
+    {
+        if (Yii::$app->workspace->checkOwner($this->id_workspace)) {
+            return parent::beforeSave($insert);
+        }
+        return false;
+    }
+
+
 }
