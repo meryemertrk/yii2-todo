@@ -71,6 +71,8 @@ class TaskController extends WebController
             throw new \yii\web\ForbiddenHttpException(Module::t('Sorry you are not allowed to view Task'));
         }
 
+
+
         return $this->render('view', [
             'model' => $this->findModel($id),
         ]);
