@@ -55,7 +55,6 @@ class m211115_010205_task_rbac extends Migration
 
         $todoWebTaskCreateOwn = $auth->createPermission('todoWebTaskCreateOwn');
         $todoWebTaskCreateOwn->description = 'Todo Web TaskCreateOwn';
-
         $todoWebTaskCreateOwn->ruleName = $rule->name;
         $auth->add($todoWebTaskCreateOwn);
         $auth->addChild($admin, $todoWebTaskCreateOwn);
