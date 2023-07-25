@@ -5,7 +5,11 @@ namespace meryemertrk\todo\models;
 
 use meryemertrk\todo\Module;
 use portalium\user\models\User;
+use portalium\workspace\models\Workspace;
 use Yii;
+use yii\behaviors\AttributeBehavior;
+use yii\behaviors\BlameableBehavior;
+use yii\db\ActiveRecord;
 
 
 /**
@@ -22,7 +26,7 @@ use Yii;
  *
  * @property User $user
  */
-class Task extends \yii\db\ActiveRecord
+class Task extends ActiveRecord
 {
 
     const STATUS = [
@@ -34,6 +38,31 @@ class Task extends \yii\db\ActiveRecord
     /**
      * {@inheritdoc}
      */
+
+
+    public function behaviors()
+    {
+        return [
+            [
+                'class' => BlameableBehavior::class,
+                'createdByAttribute' => 'id_user',
+                'updatedByAttribute' => 'id_user',
+            ],
+
+            [
+                'class' => AttributeBehavior::class,
+                'attributes' => [
+                    ActiveRecord::EVENT_BEFORE_INSERT => 'id_workspace',
+                    ActiveRecord::EVENT_BEFORE_UPDATE => 'id_workspace',
+                ],
+                'value' => function ($event) {
+                    return Yii::$app->workspace->id;
+                },
+            ]
+
+        ];
+    }
+
     public static function tableName()
     {
         return '{{%' . Module::$tablePrefix . 'task}}';
@@ -119,6 +148,12 @@ class Task extends \yii\db\ActiveRecord
             return parent::beforeSave($insert);
         }
         return false;
+    }
+
+
+    public function getWorkspace()
+    {
+        return $this->hasOne(Workspace::class, ['id_workspace' => 'id_workspace']);
     }
 
 
