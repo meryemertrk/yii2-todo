@@ -3,6 +3,7 @@
 namespace meryemertrk\todo\models;
 
 
+
 use meryemertrk\todo\Module;
 use portalium\user\models\User;
 use portalium\workspace\models\Workspace;
@@ -71,7 +72,7 @@ class Task extends ActiveRecord
     /**
      * {@inheritdoc}
      */
-    public function rules()
+   /* public function rules()
     {
         return [
             [['title', 'description', 'status', 'id_user', 'id_workspace'], 'required'],
@@ -80,6 +81,19 @@ class Task extends ActiveRecord
             [['date_create', 'date_update'], 'safe'],
             [['description'], 'string', 'max' => 255],
             [['id_user'], 'exist', 'skipOnError' => true, 'targetClass' => User::class, 'targetAttribute' => ['id_user' => 'id_user']],
+        ];
+    }*/
+
+
+    public function rules()
+    {
+        return [
+            [['status', 'id_user', 'id_workspace'], 'integer'],
+            //  [['id_user', 'id_workspace'], 'required'],
+            [['date_create', 'date_update'], 'safe'],
+            [['title', 'description'], 'string', 'max' => 255],
+            [['id_user'], 'exist', 'skipOnError' => true, 'targetClass' => User::class, 'targetAttribute' => ['id_user' => 'id_user']],
+            [['id_workspace'], 'exist', 'skipOnError' => true, 'targetClass' => Workspace::class, 'targetAttribute' => ['id_workspace' => 'id_workspace']],
         ];
     }
 
