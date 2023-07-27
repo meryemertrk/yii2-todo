@@ -34,7 +34,6 @@ class TaskController extends RestActiveController
             return $dataProvider;
         };
 
-
         return $actions;
     }
 
