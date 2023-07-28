@@ -75,6 +75,7 @@ class m211115_010205_task_rbac extends Migration
         $auth->add($todoTaskFindOwner);
         $auth->addChild($admin, $todoTaskFindOwner);
 
+        //rule olmayacak
         $todoWebTaskIndexOwn = $auth->createPermission('todoWebTaskIndexOwn');
         $todoWebTaskIndexOwn->description = 'Todo Web TaskIndexOwn';
         $todoWebTaskIndexOwn->ruleName = $rule->name;

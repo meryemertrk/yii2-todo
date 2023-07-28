@@ -1,58 +1,52 @@
+<?php
+
+use meryemertrk\todo\bundles\TaskAsset;
+
+TaskAsset::register($this);
+
+?>
+
 <div class="dropdown">
-    <a id="dLabel" role="button" data-toggle="dropdown" data-target="#" href="/page.html">
-        <i class="glyphicon glyphicon-bell"></i>
-    </a>
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Title</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.18.0/font/bootstrap-icons.css" rel="stylesheet">
+</head>
+<body>
+<a id="dLabel" role="button" data-bs-toggle="dropdown" data-bs-target="#" href="#">
+    <i class="bi-bell"></i>
+</a>
 
-    <ul class="dropdown-menu task" role="menu" aria-labelledby="dLabel">
+</body>
+</html>
 
-        <div class="task-heading"><h4 class="menu-title">Task</h4><h4 class="menu-title pull-right">View all<i class="glyphicon glyphicon-circle-arrow-right"></i></h4>
-        </div>
-        <li class="divider"></li>
-        <div class="task-wrapper">
-            <a class="content" href="#">
 
-                <div class="task-item">
-                    <h4 class="item-title">Evaluation Deadline 1 · day ago</h4>
-                    <p class="item-info">Marketing 101, Video Assignment</p>
-                </div>
 
-            </a>
-            <a class="content" href="#">
-                <div class="task-item">
-                    <h4 class="item-title">Evaluation Deadline 1 · day ago</h4>
-                    <p class="item-info">Marketing 101, Video Assignment</p>
-                </div>
-            </a>
-            <a class="content" href="#">
-                <div class="task-item">
-                    <h4 class="item-title">Evaluation Deadline 1 • day ago</h4>
-                    <p class="item-info">Marketing 101, Video Assignment</p>
-                </div>
-            </a>
-            <a class="content" href="#">
-                <div class="task-item">
-                    <h4 class="item-title">Evaluation Deadline 1 • day ago</h4>
-                    <p class="item-info">Marketing 101, Video Assignment</p>
-                </div>
+<ul class="dropdown-menu task" aria-labelledby="dLabel">
+    <li><a class="dropdown-item task-heading" href="#">Task<span class="float-end">View all<i class="bi bi-arrow-right"></i></span></a></li>
+    <li><hr class="dropdown-divider"></li>
 
-            </a>
-            <a class="content" href="#">
-                <div class="task-item">
-                    <h4 class="item-title">Evaluation Deadline 1 • day ago</h4>
-                    <p class="item-info">Marketing 101, Video Assignment</p>
-                </div>
-            </a>
-            <a class="content" href="#">
-                <div class="task-item">
-                    <h4 class="item-title">Evaluation Deadline 1 • day ago</h4>
-                    <p class="item-info">Marketing 101, Video Assignment</p>
-                </div>
-            </a>
 
-        </div>
-        <li class="divider"></li>
-        <div class="task-footer"><h4 class="menu-title">View all<i class="glyphicon glyphicon-circle-arrow-right"></i></h4></div>
-    </ul>
+    <?php if (!empty($tasks)): ?>
+        <?php foreach ($tasks as $task): ?>
+            <li>
+                <a class="dropdown-item content" href="#">
+                    <div class="task-item">
+                        <h4 class="item-title"><?= $task->title ?></h4>
+                        <p class="item-info"><?= $task->description ?></p>
+                    </div>
+                </a>
+            </li>
+            <li><hr class="dropdown-divider"></li>
+        <?php endforeach; ?>
+    <?php else: ?>
 
+    <?php endif; ?>
+
+
+    <li><hr class="dropdown-divider"></li>
+    <li><a class="dropdown-item task-footer" href="#">View all<span class="float-end"><i class="bi bi-arrow-right"></i></span></a></li>
+</ul>
 </div>
 
