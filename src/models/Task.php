@@ -11,6 +11,7 @@ use Yii;
 use yii\behaviors\AttributeBehavior;
 use yii\behaviors\BlameableBehavior;
 use yii\db\ActiveRecord;
+use yii\db\Query;
 
 
 /**
@@ -62,6 +63,24 @@ class Task extends ActiveRecord
             ]
 
         ];
+    }
+
+
+    public static function widgets()
+    {
+
+
+        if(Yii::$app->user->can('todoWebTaskIndex'))
+        {
+            return Task::find()->all();
+        }
+
+
+        if (Yii::$app->user->can('todoWebTaskIndexOwn')) {
+
+            return Task::findOne()->andWhere(['id_user'=>\Yii::$app->user->id]);
+        }
+
     }
 
     public static function tableName()

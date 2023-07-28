@@ -1,28 +1,33 @@
 
 <?php
 
+
 namespace meryemertrk\todo\bundles;
 
 use yii\web\AssetBundle;
 
-
-//burada path verilecek
 class TaskAsset extends AssetBundle
 {
-    public $sourcePath = '@vendor/meryemertrk/yii2-todo/src/assets/';
 
-    public $depends = [
-        'portalium\theme\bundles\AppAsset'
-    ];
+    public $sourcePath= '@vendor/meryemertrk/yii2-todo/src/assets/';
 
 
     public $css = [
-        'task.css'
+        'css/task.css'
     ];
+
+
+    public $publishOptions = [
+        'forceCopy' => YII_DEBUG,
+    ];
+
 
 
     public function init()
     {
         parent::init();
     }
+
+
+
 }
