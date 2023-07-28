@@ -40,4 +40,18 @@ class Module extends \portalium\base\Module
             Event::on($this::className(), UserModule::EVENT_USER_DELETE_BEFORE, [new TriggerActions(), 'onUserDeleteBefore']);
         } 
     */
+
+    public function getMenuItems(){
+        $menuItems = [
+            [
+                [
+                    'menu' => 'web',
+                    'type' => 'widget',
+                    'label' => 'meryemertrk\todo\widgets\task',
+                    'name' => 'task',
+                ]
+            ],
+        ];
+        return $menuItems;
+    }
 }
